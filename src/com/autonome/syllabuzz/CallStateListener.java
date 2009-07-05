@@ -16,22 +16,16 @@ public class CallStateListener extends PhoneStateListener {
 	
 	public void onCallStateChanged(int state, String incomingNumber) {
 		super.onCallStateChanged(state, incomingNumber);
-		//Log.d("DEBUG", TelephonyManager.CALL_STATE_OFFHOOK + " weeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee are def in here: " + state);
-
+		
 		switch(state) {
 			case TelephonyManager.CALL_STATE_IDLE:
-				//Log.d("DEBUG", "phhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhone is idle");
 				break;
 			case TelephonyManager.CALL_STATE_OFFHOOK:
-				//Log.d("DEBUG", "phoooooooooooooooooooooooooooooooooooooon is off hook");
 				break;
 			case TelephonyManager.CALL_STATE_RINGING:
-				//Log.d("DEBUG", "phoooooooooooooooooooooooooooooonnnnnnnnnnnnnnnnnnnnnnneeeeeeeeeeeeeeeeee is ringing");
 				handleCall(incomingNumber);
 				break;
 			default:
-				//Log.d("DEBUG", "The staaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaate is " + state);
-
 		}
 	}
 	
@@ -90,12 +84,13 @@ public class CallStateListener extends PhoneStateListener {
     	return name;
     }
 	
-    public static int countEm(java.lang.String t) {
+	/* unused */
+    public static int countSyllables(java.lang.String t) {
         String [] p = {"[^aeiouy\\W]*[aeiouy]++[^aeiouy\\W]*(e\\W)*\\W*","", "e+\\W","","[aeiouy]++","", "\\W","","[^aeiouy\\W]++\\W++",""};
         if (t.equals("e"))  return 0;
         for (int i = 0; i < p.length/2; i++)
             if (t.matches(p[2*i]+".*"))
-                return  (i+1)%2 + countEm(t.replaceFirst(p[2*i],p[2*i+1]));
+                return  (i+1)%2 + countSyllables(t.replaceFirst(p[2*i],p[2*i+1]));
         return 0;
     }
 
